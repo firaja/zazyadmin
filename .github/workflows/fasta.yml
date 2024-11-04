@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '*/5 * * * *'
 jobs:
   use_api:
     runs-on: ubuntu-latest
