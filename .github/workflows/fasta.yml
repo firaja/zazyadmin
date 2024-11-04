@@ -30,4 +30,4 @@ jobs:
           -H 'sec-fetch-user: ?1' \
           -H 'upgrade-insecure-requests: 1' \
           -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' \
-          --data-raw 'st=0&act=Post&f=6409732&CODE=03&t=78327230&Post=%5Bsize%3D7%5D%5BCENTER%5D%3Ci%3E%5Bfont%3DOptima%5DFasta%2C+dolcezza+vasta%2C%3Cbr%3Enella+mente%2C+una+fiasta.%5B%2Ffont%5D%3C%2Fi%3E%5B%2FCENTER%5D%5B%2Fsize%5D&submit=LASCIA+UN+%2B1+AUTOMATICO'
+          --data-raw 'st=0&act=Post&f=6409732&CODE=03&t=78327230&Post=%5Bsize%3D7%5D%5BCENTER%5D%3Ci%3E%5Bfont%3DOptima%5DQuando+nessuno+guarda%3Cbr%3EMaro+mette+X+su+Forza+Italia.%5B%2Ffont%5D%3C%2Fi%3E%5B%2FCENTER%5D%5B%2Fsize%5D&submit=LASCIA+UN+%2B1+AUTOMATICO'
