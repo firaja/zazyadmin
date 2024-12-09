@@ -105,7 +105,7 @@ def send(body):
 
 	print(data)
 
-	# return requests.post('https://acquageraci.forumfree.it/', cookies=cookies, headers=headers, data=data)
+	return requests.post('https://acquageraci.forumfree.it/', cookies=cookies, headers=headers, data=data)
 
 
 
