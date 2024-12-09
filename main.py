@@ -130,13 +130,18 @@ def main():
 	actual_score, actual_usernames = search(table, ME)
 	print((actual_score, actual_usernames))
 
+	alone = ', ' in actual_usernames
+
 	new_score = actual_score + 1
 	new_actual_score = actual_score - 1
 	new_actual_usernames = ', '.join(list(filter(lambda a: a != ME, actual_usernames.split(', '))))
 
 	print(f'new_actual_usernames: {new_actual_usernames}')
 
-	table[actual_score] = new_actual_usernames
+	if alone:
+		del table[actual_score]
+	else:
+		table[actual_score] = new_actual_usernames
 
 	if new_score in table:
 		table[new_score] = f'{table[new_score]}, {ME}'
