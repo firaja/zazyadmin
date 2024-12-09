@@ -7,27 +7,14 @@ jobs:
     permissions:
       issues: read
     steps:
-      - name: cURL request
-        env:
-          TOKEN: ${{ secrets.TOKEN }}
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip' # caching pip dependencies
+      - name: Install Dependencies
         run: |
-          curl 'https://acquageraci.forumfree.it/' \
-          -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
-          -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8,it;q=0.7' \
-          -H 'cache-control: max-age=0' \
-          -H 'content-type: application/x-www-form-urlencoded' \
-          -H 'cookie: sb_7168097=e30=; _ga=GA1.2.355278801.1695137001; sb_0=e30=; st_audience_clientId=fa3447c5-ccde-4486-9410-6243c9e27454; login-from=https%253A%252F%252Firc.forumfree.it%252Fchat%252FScripts%252FProtocol.js; member_id=7168097; pass_hash=1d3f7c305c93375ee4f792e022fb2a5de35419ed9c8014fc2190905833736d90; __samesite_migration=migrated; cpop=1; __gsas=ID=2c83ad60cb7de031:T=1711119609:RT=1711119609:S=ALNI_MaZsw3lR3X3AAnlpl7zaIYajuPQBQ; _opregolamento=1; resolution=1792x1120; _gid=GA1.2.842773623.1716888866; session_id="$TOKEN"; unread=0%2C0%2C0; cat=191706; notification_unread=0%2C0; auth_session=nojjtknftkpodi4ysspwu2lhnfwwo; pop1=30; MgidStorage=%7B%220%22%3A%7B%22svspr%22%3A%22%22%2C%22svsds%22%3A124%7D%2C%22C719965%22%3A%7B%22page%22%3A2%2C%22time%22%3A%221716903007515%22%7D%7D' \
-          -H 'origin: https://acquageraci.forumfree.it' \
-          -H 'priority: u=0, i' \
-          -H 'referer: https://acquageraci.forumfree.it/' \
-          -H 'sec-ch-ua: "Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"' \
-          -H 'sec-ch-ua-mobile: ?0' \
-          -H 'sec-ch-ua-platform: "macOS"' \
-          -H 'sec-ch-ua-platform-version: "14.5.0"' \
-          -H 'sec-fetch-dest: document' \
-          -H 'sec-fetch-mode: navigate' \
-          -H 'sec-fetch-site: same-origin' \
-          -H 'sec-fetch-user: ?1' \
-          -H 'upgrade-insecure-requests: 1' \
-          -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' \
-          --data-raw 'st=0&act=Post&f=6409732&CODE=03&t=78327230&Post=%5Bsize%3D7%5D%5BCENTER%5D%3Ci%3E%5Bfont%3DOptima%5DQuando+nessuno+guarda%3Cbr%3EMaro+mette+X+su+Forza+Italia.%5B%2Ffont%5D%3C%2Fi%3E%5B%2FCENTER%5D%5B%2Fsize%5D&submit=LASCIA+UN+%2B1+AUTOMATICO'
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run Python Script
+        run: python main.py https://acquageraci.forumfree.it/\?f=6409732
