@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import sys
 import traceback
+import urllib.parse
 
 
 
@@ -97,9 +98,9 @@ def send(body):
 	}
 
 	data = 'st=0&act=Post&s=0ba56d35f73ace9c4102d0915990ab69&f=6409732&CODE=03&t=36639860&TopicTime=&Post='
-	data += body.replace('\n', '<br>')
+	data += urllib.parse.quote_plus(body.replace('\n', '<br>'))
 
-
+	print(data)
 
 	return requests.post('https://acquageraci.forumfree.it/', cookies=cookies, headers=headers, data=data)
 
