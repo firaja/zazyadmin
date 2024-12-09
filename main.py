@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from bs4 import BeautifulSoup
 import requests
 import sys
@@ -50,8 +52,9 @@ def encode(body):
 
 def decode(table):
 	body = ''
-	for key, value in table.items():
-		body += f'{value}: {key}\n'
+	sorted_keys = sorted(table.keys(), reverse=True)
+	for key in sorted_keys:
+		body += f'{table[key]}: {key}\n'
 	return body[:-1]
 
 
@@ -98,11 +101,11 @@ def send(body):
 	}
 
 	data = 'st=0&act=Post&s=0ba56d35f73ace9c4102d0915990ab69&f=6409732&CODE=03&t=36639860&TopicTime=&Post='
-	data += urllib.parse.quote_plus(body.replace('\n', '<br>'))
+	data += urllib.parse.quote_plus(body.replace('\n', '<br>'), encoding='cp1252')
 
 	print(data)
 
-	return requests.post('https://acquageraci.forumfree.it/', cookies=cookies, headers=headers, data=data)
+	# return requests.post('https://acquageraci.forumfree.it/', cookies=cookies, headers=headers, data=data)
 
 
 
@@ -130,10 +133,9 @@ def main():
 	actual_score, actual_usernames = search(table, ME)
 	print((actual_score, actual_usernames))
 
-	alone = ', ' in actual_usernames
+	alone = ', ' not in actual_usernames
 
 	new_score = actual_score + 1
-	new_actual_score = actual_score - 1
 	new_actual_usernames = ', '.join(list(filter(lambda a: a != ME, actual_usernames.split(', '))))
 
 	print(f'new_actual_usernames: {new_actual_usernames}')
