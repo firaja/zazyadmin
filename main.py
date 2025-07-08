@@ -154,7 +154,7 @@ def main():
 
 	print(new_body)"""
 
-	send("Forum Stardo, la caverna del cazzeggio.")
+	send("Ciao fasta")
 
 
 
