@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-
+#!/usr/bin/env python3
+import datetime
+import calendar
 from bs4 import BeautifulSoup
 import requests
 import sys
@@ -56,6 +58,51 @@ def decode(table):
 	for key in sorted_keys:
 		body += f'{table[key]}: {key}\n'
 	return body[:-1]
+
+def get_countdown(target):
+	now = datetime.datetime.now()
+
+	years   = target.year   - now.year
+	months  = target.month  - now.month
+	days    = target.day    - now.day
+	hours   = target.hour   - now.hour
+	minutes = target.minute - now.minute
+	seconds = target.second - now.second
+
+	# Borrow for seconds → minutes
+	if seconds < 0:
+		seconds += 60
+		minutes -= 1
+
+	# Borrow for minutes → hours
+	if minutes < 0:
+		minutes += 60
+		hours -= 1
+
+	# Borrow for hours → days
+	if hours < 0:
+		hours += 24
+		days -= 1
+
+	# Borrow for days → months (use days in the previous month of 'now')
+	if days < 0:
+		prev_year  = now.year
+		prev_month = now.month
+		# if we're in January, wrap to December of previous year
+		if prev_month == 1:
+		    prev_month = 1
+		    prev_year -= 1
+		days_in_prev_month = calendar.monthrange(prev_year, prev_month)[1]
+		days += days_in_prev_month
+		months -= 1
+
+	# Borrow for months → years
+	if months < 0:
+		months += 12
+		years  -= 1
+
+	return years, months, days, hours, minutes, seconds
+
 
 
 def send(body):
@@ -153,8 +200,10 @@ def main():
 	new_body = decode(table)
 
 	print(new_body)"""
-
-	send("Ciao fasta")
+	target = datetime.datetime.strptime('2026/10/02 02:00:00', "%Y/%m/%d %H:%M:%S")
+	countdown = get_countdown(target)
+	y, m, d, h, mm, s = countdown
+	send(f'[CENTER]<div style="max-width: 800px; padding: 20px 20px; background-color: #000; color: #2e6db4; border: 5px solid #00ab9f">[size=10][font=Geneva]COUNTDOWN AL RADUNO STARDO VENTENNALE\r\n {y} ANNI, {m} MESI, {d} GIORNI, {h} ORE, {mm} MINUTI, {s} SECONDI[/font][/size]\r\n\r\n[size=7][color=#f3c300]Non mancate amici, ulteriori informazioni saranno presto disponibili[/color][/size]</div>[/CENTER]')
 
 
 
@@ -168,4 +217,3 @@ if __name__ == '__main__':
 		pass
 	finally:
 		exit(0)
-	
