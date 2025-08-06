@@ -147,7 +147,7 @@ def send(body):
 		'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
 	}
 
-	data = 'st=0&act=Post&s=0ba56d35f73ace9c4102d0915990ab69&f=6409732&CODE=03&t=12580895&TopicTime=&Post='
+	data = 'st=0&act=Post&s=0ba56d35f73ace9c4102d0915990ab69&f=6409732&CODE=03&t=80783551&TopicTime=&Post='
 	data += urllib.parse.quote_plus(body.replace('\n', '<br>'), encoding='cp1252')
 
 	print(data)
